@@ -1,0 +1,48 @@
+package com.highcastle.game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import static com.highcastle.game.GameManager.ButtonDownClass;
+import static com.highcastle.game.GameManager.ButtonLeftClass;
+import static com.highcastle.game.GameManager.ButtonRightClass;
+import static com.highcastle.game.GameManager.ButtonUpClass;
+
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.highcastle.game.Animator;
+
+public class InputManager {
+
+
+    public static void handleInput(OrthographicCamera camera, Sprite sprite) {
+        if (Gdx.input.justTouched()) {
+            // Получаем координаты касания
+            // И устанавливаем значения координат в вектор temp
+            GameManager.temp.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            // получаем координаты касания
+            // относительно области просмотра нашей "камеры"
+            camera.unproject(GameManager.temp);
+            float touchX = GameManager.temp.x;
+            float touchY = GameManager.temp.y;
+
+
+            if ((touchX >= ButtonUpClass.position.x) && touchX <= (ButtonUpClass.position.x + ButtonUpClass.width) && (touchY >= ButtonUpClass.position.y) && touchY <= (ButtonUpClass.position.y + ButtonUpClass.height)) {
+
+                sprite.translateY(20.0f);
+
+            }
+            if ((touchX >= ButtonDownClass.position.x) && touchX <= (ButtonDownClass.position.x + ButtonDownClass.width) && (touchY >= ButtonDownClass.position.y) && touchY <= (ButtonDownClass.position.y + ButtonDownClass.height)) {
+
+            sprite.translateY(-20.0f);
+
+            }
+            if ((touchX >= ButtonRightClass.position.x) && touchX <= (ButtonRightClass.position.x + ButtonRightClass.width) && (touchY >= ButtonRightClass.position.y) && touchY <= (ButtonRightClass.position.y + ButtonRightClass.height)) {
+            sprite.translateX(20.0f);
+            }
+            if ((touchX >= ButtonLeftClass.position.x) && touchX <= (ButtonLeftClass.position.x + ButtonLeftClass.width) && (touchY >= ButtonLeftClass.position.y) && touchY <= (ButtonLeftClass.position.y + ButtonLeftClass.height)) {
+            sprite.translateX(-20.0f);
+            }
+        }
+
+
+    }
+}
+
