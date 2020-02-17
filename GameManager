@@ -1,0 +1,64 @@
+package com.highcastle.game;
+
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+
+public class GameManager {
+
+    static Buttons ButtonUpClass;
+    static Buttons ButtonDownClass;
+    static Buttons ButtonRightClass;
+    static Buttons ButtonLeftClass;
+
+    static Texture ButtonDownTexture;
+    static Texture ButtonUpTexture;
+    static Texture ButtonRightTexture;
+    static Texture ButtonLeftTexture;
+    static Vector3 temp = new Vector3(); // временный вектор для хранения входных координат
+
+    private static final float BUTTON_RESIZE_FACTOR = 2500f;
+    // правая и левая кнопка
+    private static final float BUTTONS_RIGHT_VERT = 8.5f;
+    private static final float BUTTONS_LEFT_VERT = 8.5f;
+    private static final float BUTTONS_RIGHT_HORIZ = 6;
+    private static final float BUTTONS_LEFT_HORIZ = 12;
+
+    //Верхняя и нижняя
+    private static final float BUTTONS_UP_HORIZ = 8;
+    private static final float BUTTONS_DOWN_HORIZ = 8;
+    private static final float BUTTONS_UP_VERT = 6;
+    private static final float BUTTONS_DOWN_VERT = 16;
+
+     public static float width, height;
+
+
+
+
+
+    public static void initialize(float width, float height) {
+        GameManager.width = width;
+        GameManager.height = height;
+        ButtonUpTexture = new Texture(Gdx.files.internal("ButtonUp.png"));
+        ButtonDownTexture = new Texture(Gdx.files.internal("ButtonDown.png"));
+        ButtonRightTexture = new Texture(Gdx.files.internal("ButtonRight.png"));
+        ButtonLeftTexture = new Texture(Gdx.files.internal("ButtonLeft.png"));
+
+        ButtonUpClass = new Buttons();
+        ButtonDownClass = new Buttons();
+        ButtonRightClass = new Buttons();
+        ButtonLeftClass = new Buttons();
+
+        initButtons();
+    }
+
+    public static void renderGame(SpriteBatch batch) {
+        ButtonUpClass.render(batch);
+        ButtonDownClass.render(batch);
+        ButtonRightClass.render(batch);
+        ButtonLeftClass.render(batch);
+    }
+
