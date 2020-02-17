@@ -1,0 +1,80 @@
+package com.highcastle.game;
+
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.ApplicationListener;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.highcastle.game.InputManager;
+
+
+public class MyGame extends ApplicationAdapter{
+
+
+	private OrthographicCamera camera;
+	SpriteBatch batch;
+	Texture texture;
+	Sprite sprite;
+
+
+	public float Xposition;
+	public float Yposition;
+
+	private float w,h;
+
+	@Override
+	public void create() {
+	texture = new Texture("anim3.png");
+	sprite = new Sprite(texture);
+	w = Gdx.graphics.getWidth();
+	h = Gdx.graphics.getWidth();
+
+
+	Xposition = 500;
+	Yposition = 500;
+	camera = new OrthographicCamera(w, h);
+	camera.setToOrtho(false);
+	batch = new SpriteBatch();
+	GameManager.initialize(w, h);
+	}
+
+
+	@Override
+	public void dispose() {
+	batch.dispose();
+	GameManager.dispose();
+	}
+
+	@Override
+	public void render() {
+		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.setProjectionMatrix(camera.combined);
+		InputManager.handleInput(camera, sprite);
+		batch.begin();
+		sprite.draw(batch);
+		GameManager.renderGame(batch);
+
+		batch.end();
+
+
+	}
+
+	@Override
+	public void resize(int width, int height) {
+	}
+
+	@Override
+	public void pause() {
+	}
+
+	@Override
+	public void resume() {
+	}
+}
+
+
