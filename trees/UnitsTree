@@ -1,0 +1,8 @@
+import unitsvisible?:"com.highcastle.game,GameAI.actions.Condition"
+import unitsatack:"com.highcastle.game,GameAI.actions.Condition"
+
+root
+    selector
+        sequence
+            unitsvisible?
+            unitsatack
